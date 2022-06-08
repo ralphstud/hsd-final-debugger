@@ -63,10 +63,22 @@ void FPGA::largeMM(const float* weight_mat, const float* input_mat, float* outpu
         int block_col_2 = min(SIZE, num_matrix2-k);
 
         // 1) Assign a m1
-        // Implement This
+        for(int l = 0; l < SIZE; ++l)
+          m1[l] = 0;
+        for(int r = 0; r < block_row; ++r)
+        { 
+          for(int c_1 = 0; c_1 < block_col_1; ++c_1)
+            m1[r * SIZE + c_1] = weight_mat[(i + r) * num_input + j + c_1];
+        }
 
         // 2) Assign a m2
-        // Implement This
+        for(int l = 0; l < SIZE; ++l)
+          m2[l] = 0;
+        for(int c_1 = 0; c_1 < block_col_1; ++c_1)
+        { 
+          for(int c_2 = 0; c_2 < block_col_2; ++c_2)
+            m2[c_1 * SIZE + c_2] = input_mat[(j + c_1) * num_matrix2 + k + c_2];
+        }
 
 
 		// 3) Call a function `blockMM() to execute Matrix matrix multiplication
